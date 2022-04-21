@@ -8,8 +8,6 @@ public class Main {
     public static void puzzleGame(){
         Scanner input = new Scanner(System.in);
         try{
-            System.out.println("Masukkan banyak angka yang mau dicetak [2-10]:");
-            int inputAngka = Integer.parseInt(input.nextLine());
             ArrayList<String []> listOfAnswer = new ArrayList<>();
             // Initialize child array
             String [] answerOne = {""};
@@ -34,15 +32,18 @@ public class Main {
                     if(i == 0 && contains1){
                         correctAnswer1 += 10;
                         System.out.println("#Right. Score : " + correctAnswer1);
+                        poolAnswer.add(inputJawaban);
                         countScore++;
                     } else if(i == 1 && contains2){
                         correctAnswer2 += 10;
                         System.out.println("#Right. Score : " + correctAnswer2);
+                        poolAnswer.add(inputJawaban);
                         countScore++;
                     } else if(i == 2 && contains3){
                         correctAnswer3 += 10;
                         System.out.println("#Right. Score : " + correctAnswer3);
                         countScore++;
+                        poolAnswer.add(inputJawaban);
                     } else if(poolAnswer.contains(inputJawaban)){
                         System.out.println("You had already type this word before...");
                         j--;
