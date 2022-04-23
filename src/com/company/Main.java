@@ -10,6 +10,7 @@ public class Main {
 
         /** Variable Level 1 **/
         int level =1;
+        String given_word_1 =" d e t t l i ";
         ArrayList<String> listOfAnswer_1 = new ArrayList<>();
         listOfAnswer_1.add("die");
         listOfAnswer_1.add("led");
@@ -35,8 +36,34 @@ public class Main {
         listOfAnswer_1.add("titled");
 
         /** Variable level 2 **/
+        String given_word_2 =" s e c a e n ";
+        ArrayList<String> listOfAnswer_2 = new ArrayList<>();
+        listOfAnswer_2.add("sec");
+        listOfAnswer_2.add("can");
+        listOfAnswer_2.add("cane");
+        listOfAnswer_2.add("scan");
+        listOfAnswer_2.add("scene");
+        listOfAnswer_2.add("case");
+        listOfAnswer_2.add("cease");
+        listOfAnswer_2.add("see");
+        listOfAnswer_2.add("sea");
+        listOfAnswer_2.add("seen");
+        listOfAnswer_2.add("sac");
 
         /** variable Level 3 **/
+        String given_word_3 =" h k r n e o ";
+        ArrayList<String> listOfAnswer_3 = new ArrayList<>();
+        listOfAnswer_3.add("honk");
+        listOfAnswer_3.add("honker");
+        listOfAnswer_3.add("roe");
+        listOfAnswer_3.add("ore");
+        listOfAnswer_3.add("her");
+        listOfAnswer_3.add("hen");
+        listOfAnswer_3.add("one");
+        listOfAnswer_3.add("neo");
+        listOfAnswer_3.add("krone");
+        listOfAnswer_3.add("hoe");
+        listOfAnswer_3.add("hone");
 
         System.out.println("Coepoe Word Puzzle");
         System.out.println("===================");
@@ -46,21 +73,21 @@ public class Main {
         System.out.println("3. To get through to next level, you have to score 70 points each level.");
 
         // level 1
-        final_score = game(level, listOfAnswer_1);
+        final_score = game(level, listOfAnswer_1, given_word_1);
         if(final_score >= 70){ // 70 passed
 
             //masuk level 2
             level = level+1;
-            int skor_lv_2 = game(level, listOfAnswer_1);
+            int skor_lv_2 = game(level, listOfAnswer_2, given_word_2);
             final_score=final_score+skor_lv_2;
             if(final_score >= 140){ // minamal level 1+ minimal level 2 = passed
 
                 //level 3
                 level = level+1;
-                int score_lv_3 = game(level, listOfAnswer_1);
+                int score_lv_3 = game(level, listOfAnswer_3, given_word_3);
                 final_score = final_score +score_lv_3;
                     if(final_score >= 210){ // minimal level 3 + minimal level 2 + minimal level 1 = 210, sehinggal level 3 = 70 aja udah passed
-                        System.out.println("Overall Score = "+final_score);
+                        System.out.println("\nOverall Score = "+final_score);
                         System.out.println("You Win !!");
                     }else{
                          System.out.println("Do you want to retry [y/t]?");
@@ -69,23 +96,37 @@ public class Main {
                              puzzleGame();
                          }else{
                              System.out.println("Game End");
+                             System.exit(0);
                          }
                     }
             }else{
-                //balik ke level 1
-                level=level-1;
-                game(level, listOfAnswer_1);
+                //gagal level 2
+                System.out.println("Do you want to retry [y/t]?");
+                String ulang = input.nextLine();
+                if (ulang.equalsIgnoreCase("y")){
+                    puzzleGame();
+                }else{
+                    System.out.println("Game End");
+                    System.exit(0);
+                }
             }
         }else{
-            //balik ke level 1
-            game(level, listOfAnswer_1);
+            //gagal level 1
+            System.out.println("Do you want to retry [y/t]?");
+            String ulang = input.nextLine();
+            if (ulang.equalsIgnoreCase("y")){
+                puzzleGame();
+            }else{
+                System.out.println("Game End");
+                System.exit(0);
+            }
         }
     }
-    public static int game(int level, ArrayList<String> listOfAnswer){
+    public static int game(int level, ArrayList<String> listOfAnswer, String given_word){
         int countScore = 0;
 
-        System.out.println("=== level "+level+" ===");
-        System.out.println("  d   e   t   t   l   i  ");
+        System.out.println("\n=== level "+level+" ===");
+        System.out.println(given_word);
         Scanner input = new Scanner(System.in);
         try{
                 ArrayList<String> poolAnswer = new ArrayList<>();
@@ -110,13 +151,20 @@ public class Main {
                 throw new ArithmeticException("You lose try!! Try again... \nYou had answered 10 times with "+ correctAnswer +" right answers..");
             }else{
                 System.out.println("You had answered 10 times with " + correctAnswer + " right answers...");
+                System.out.println("The Right Answers :");
+                System.out.println(listOfAnswer.toString().substring(1, listOfAnswer.toString().length() - 1));
                 return countScore;
             }
         }catch (ArithmeticException e){
             System.out.println(e.getMessage());
             System.out.println("Do you want to retry [y/t]?");
             String ulang = input.nextLine();
-            if (ulang.equalsIgnoreCase("y")) puzzleGame();
+            if (ulang.equalsIgnoreCase("y")) {
+                puzzleGame();
+            }else{
+                System.out.println("Game End.");
+                System.exit(0);
+            }
         }
         return countScore;
     }
